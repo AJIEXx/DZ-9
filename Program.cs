@@ -25,16 +25,16 @@ while (begin)
             918 -> 1
             */
 
-            ReadInt = number int("Введите трехзначное число: ");
-            число  =  сумма  int.toString().Длина;
+            int number = ReadInt("Введите трехзначное число: ");
+            int amount = number.ToString().Length;
 
-            если (сумма < 3 ||  сумма > 3)
+            if (amount < 3 || amount > 3)
             {
-                Консоль.WriteLine("Вы ввели не трехзначное число");
+                Console.WriteLine("Вы ввели не трехзначное число");
             }
-            ещё
+            else
             {
-                Консоль.Строка записи(в центре (число));
+                Console.WriteLine(InCenter(number));
             }
 
 
@@ -42,18 +42,18 @@ while (begin)
             // ФУНКЦИИ------------------------------------------------------------------------------------------------------
 
             // Функция принимает сообщение для отображения в консоли, и выводит результат введенных данных пользователем. 
-            readInt  int(строковое  сообщение)
+            int ReadInt(string message)
             {
-                Консоль.Написать(сообщение);
-                Преобразовать  возврат.ToInt32(консоль.ReadLine());
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
             }
 
             // Функция вывода цифры стоящей в середине трехзначногно числа.
-            В центре int (int  a)
+            int InCenter(int a)
             {
                 
-                =  результат  int ((a  / 10) % 10);
-                возврат результата ;
+                int result = ((a / 10) % 10);
+                return result;
             }
             break;
 
@@ -65,39 +65,39 @@ while (begin)
             // 32679 -> 6
             */
 
-            ReadInt = number int("Введите число: ");
-            число =  количество  int.toString().Длина;
-            Консоль.Запись(makeArray(число, количество));
+            int number = ReadInt("Введите число: ");
+            int count = number.ToString().Length;
+            Console.Write(MakeArray(number, count));
 
 
             // ФУНКЦИИ------------------------------------------------------------------------------------------------------
 
             // Функция принимает сообщение для отображения в консоли, и выводит результат введенных данных пользователем.
-            readInt  int(строковое  сообщение)
+            int ReadInt(string message)
             {
-                Консоль.Написать(сообщение);
-                Преобразовать  возврат.ToInt32(консоль.ReadLine());
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
             }
 
             // Функция принимает число введенное пользователем, количество символов, и выводит третью цифру числа. Если 3 цифры нет, сообщает и выводит 0.
-            makeArray  int(int  a, int  b)
+            int MakeArray(int a, int b)
             {
-            0 =  результат  int;
-                если (b < 3)
+            int result = 0;
+                if (b < 3)
                 {
-                    Консоль.Write("Третьей цифры нет, держи: ");
+                    Console.Write("Третьей цифры нет, держи: ");
                 }
-                ещё
+                else
                 {
-                    1 = c int;
-                    для (int  i = b; i > 3; i--)
+                    int c = 1;
+                    for (int i = b; i > 3; i--)
                     {
-                        10 * c = c;
+                        c = c * 10;
                     }
 
-                    = результат (a  /  c) % 10;
+                    result = (a / c) % 10;
                 }
-            возврат результата ;
+            return result;
             }
             break;
 
@@ -110,39 +110,39 @@ while (begin)
             1 -> нет
             */
 
-            ReadInt = dayNumber int("Введите число от 1 до 7: ");
-            Консоль.Строка записи (рабочий день (число дней));
+            int dayNumber = ReadInt("Введите число от 1 до 7: ");
+            Console.WriteLine(WorkHoliday(dayNumber));
 
 
             // ФУНКЦИИ------------------------------------------------------------------------------------------------------
 
             // Функция принимает сообщение для отображения в консоли, и выводит результат введенных данных пользователем.
-            readInt  int(строковое  сообщение)
+            int ReadInt(string message)
             {
-                Консоль.Написать(сообщение);
-                Преобразовать  возврат.ToInt32(консоль.ReadLine());
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
             }
 
             // Функция принимает число от 1 до 7 и выводит сообщение - выходной день или нет.
             // *** Костыль, но я тренировал функции. проблема с return была. ***
-            Строка  рабочего дня (int  a)
+            string WorkHoliday(int a)
             {
-                если (a > 0 && a < 8)
+                if (a > 0 && a < 8)
                 {
-                    если (a == 7 || a == 6)
+                    if (a == 7 || a == 6)
                     {
-                        Консоль.Write("Под цифрой " + a + " - Выходной");
+                        Console.Write("Под цифрой " + a + " - Выходной");
                     }
-                    ещё
+                    else
                     {
-                        Консоль.Write("Под цифрой " + a + " - Рабочий");
+                        Console.Write("Под цифрой " + a + " - Рабочий");
                     }
                 }
-                ещё
+                else
                 {
-                    Консоль.Write("Вы ввели число не в пределах от 1 до 7, поэтому не возможно определить");
+                    Console.Write("Вы ввели число не в пределах от 1 до 7, поэтому не возможно определить");
                 }
-                "  день."return;
+                return " день.";
             }
             break;
 
@@ -155,24 +155,24 @@ while (begin)
             23432 -> да
             */
 
-            Консоль.WriteLine("Введите число: ");
-            Консоль = числовая  строка.ReadLine();
-            число = len  int.Длина;
+            Console.WriteLine("Введите число: ");
+            string number = Console.ReadLine();
+            int len = number.Length;
 
-            если (len == 5)
+            if (len == 5)
             {
-                если (число [0] == число [4] && число[1] == число[3])
+                if (number[0] == number[4] && number[1] == number[3])
                 {
-                    Консоль.WriteLine($"{number} - Палиндром");
+                    Console.WriteLine($"{number} - Палиндром");
                 }
-                ещё
+                else
                 {
-                    Консоль.WriteLine($"{number} - НЕ палиндром");
+                    Console.WriteLine($"{number} - НЕ палиндром");
                 }
             }
-            ещё
+            else
             {
-                Консоль.WriteLine($"ОШИБКА: {number} - не является пятизначным");
+                Console.WriteLine($"ОШИБКА: {number} - не является пятизначным");
             }
             break;
 
@@ -180,30 +180,30 @@ while (begin)
             /*
             Задача 21 (branch task_2)
             Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.
-            A (3,6,8); B (2,1,-7), -> 15,84
-            A (7,-5, 0); B (1,-1,9) -> 11,53
+            A (3,6,8); B (2,1,-7), -> 15.84
+            A (7,-5, 0); B (1,-1,9) -> 11.53
             */
 
-            ReadInt = x1 int("Введите координату X первой точки: ");
-            ReadInt = y1 int("Введите координату Y первой точки: ");
-            ReadInt = z1 int("Введите координату Z первой точки: ");
-            ReadInt = x2 int("Введите координату X второй точки: ");
-            ReadInt = y2 int("Введите координату Y второй точки: ");
-            ReadInt = z2 int("Введите координату Z второй точки: ");
+            int x1 = ReadInt("Введите координату X первой точки: ");
+            int y1 = ReadInt("Введите координату Y первой точки: ");
+            int z1 = ReadInt("Введите координату Z первой точки: ");
+            int x2 = ReadInt("Введите координату X второй точки: ");
+            int y2 = ReadInt("Введите координату Y второй точки: ");
+            int z2 = ReadInt("Введите координату Z второй точки: ");
 
-            x1 - x2 = целое  число;
-            y1 - y2 = B int;
-            z2 - z1 = C int;
+            int A = x2 - x1;
+            int B = y2 - y1;
+            int C = z1 - z2;
 
-            Математика  =  длина  double.Sqrt(A  *  A  +  B  *  B  +  C  *  C);
-            Консоль.WriteLine($"Длинна отрезка {length}");
+            double length = Math.Sqrt(A * A + B * B + C * C);
+            Console.WriteLine($"Длинна отрезка {length}");
 
 
             // Функция ввода сообщения
-            readInt  int(строковое  сообщение)
+            int ReadInt(string message)
             {
-                Консоль.Написать(сообщение);
-                Преобразовать  возврат.ToInt32(консоль.ReadLine());
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
             }
             break;
 
@@ -215,20 +215,20 @@ while (begin)
             5 -> 1, 8, 27, 64, 125
             */
 
-            ReadInt = number int("Введите число N: ");
+            int number = ReadInt("Введите число N: ");
 
-            для (int  i = 1; i <= число; i++)
+            for (int i = 1; i <= number; i++)
             { 
-                Консоль.Написать($"{i*i*i} ");
+                Console.Write($"{i*i*i} ");
             }
 
 
 
             // Функция ввода сообщения
-            readInt  int(строковое  сообщение)
+            int ReadInt(string message)
             {
-                Консоль.Написать(сообщение);
-                Преобразовать  возврат.ToInt32(консоль.ReadLine());
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
             }
             break;
 
