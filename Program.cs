@@ -7,119 +7,195 @@ while (begin)
 {
     Console.WriteLine("------");
     Console.WriteLine("Введите число для соответствующей задачи или иное для выхода:");
-    Console.WriteLine("1. Посчитайте, сколько чисел больше 0 ввёл пользователь.");
-    Console.WriteLine("2. Упрощенный вариант 1 задачи.");
-    Console.WriteLine("3. Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.");
+    Console.WriteLine("1. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.");
+    Console.WriteLine("2. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.");
+    Console.WriteLine("3. Найдите среднее арифметическое элементов в каждом столбце.");
     programm = Convert.ToInt32(Console.ReadLine());
     
     switch (programm)
     {
         case 1:
-           //Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
-           //0, 7, 8, -2, -2 -> 2
-            //1, -7, 567, 89, 223-> 3
+            /*
+            Задача 47. 
+            Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+            m = 3, n = 4.
+            0,5 7 -2 -0,2
+            1 -3,3 8 -9,9
+            8 7,8 -7,1 9
+            */
 
-            Console.Write("Введите числа через запятую: ");
-            int[] numbers = StringToNum(Console.ReadLine());
-            PrintArray(numbers);
-            int sum = 0;
-            for (int i = 0; i < numbers.Length; i++)
+            int rows = ReadInt("Введите количество строк: ");
+            int colums = ReadInt("Введите количество столбцов: ");
+            double[,] numbers = new double[rows, colums];
+            FillArray2D(numbers);
+            PrintArray2D(numbers);
+
+            // Заполнение массива рандомными вещественными числами
+            void FillArray2D(double[,] array)
             {
-                if (numbers[i] > 0)
+                for (int i = 0; i < array.GetLength(0); i++)
                 {
-                    sum++;
+                    for (int j = 0; j < array.GetLength(1); j++)
+                    {
+                        array[i, j] = new Random().Next(-99, 99) / 10.0;
+                    }
                 }
             }
-            Console.WriteLine();
-            Console.WriteLine($"количество значений больше 0 = {sum}");
 
-
-            int[] StringToNum(string input)
+            //  Функция вывода массива в терминал
+            void PrintArray2D(double[,] array)
             {
-                int count = 1;
-                for (int i = 0; i < input.Length; i++)
+                for (int i = 0; i < array.GetLength(0); i++)
                 {
-                    if (input[i] == ',')
+                    for (int j = 0; j < array.GetLength(1); j++)
                     {
-                        count++;
+                        Console.Write(array[i, j] + " ");
                     }
+                    Console.WriteLine();
                 }
-
-                int[] numbers = new int [count];
-                int index = 0;
-
-                for (int i = 0; i < input.Length; i++)
-                {
-                    string temp = "";
-
-                    while (input [i] != ',')
-                    {
-                    if(i != input.Length - 1)
-                    {
-                        temp += input [i].ToString();
-                        i++;
-                    }
-                    else
-                    {
-                        temp += input [i].ToString();
-                        break;
-                    }
-                    }
-                    numbers[index] = Convert.ToInt32(temp);
-                    index++;
-                }
-                return numbers;
+                Console.WriteLine();
             }
 
-
-            void PrintArray(int[] array)
+            // Функция ввода 
+            int ReadInt(string message)
             {
-                Console.Write("[ ");
-                for (int i = 0; i < array.Length; i++)
-                {
-                    Console.Write(array[i] + " ");
-                }
-                Console.Write("]");
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
             }
             break;
 
         case 2:
-            // Задача 41: Пользователь вводит с клавиатуры M чисел в одну линию 
-            // (не используем Enter). Числа разделены пробелами. 
-            //Посчитайте, сколько чисел больше 0 ввёл пользователь.
-            //0 7 8 -2 -2 -> 2
-            //1 -7 567 89 223-> 4
+            /*
+            Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает 
+            значение этого элемента или же указание, что такого элемента нет.
+            Во вводе первая цифра - номер строки, вторая - столбца. Цифры не больше 9.
+            Например, задан массив:
+            1 4 7 2
+            5 9 2 3
+            8 4 2 4
+            1, 7(ввод индексов) -> такого числа в массиве нет
+            1, 1 -> 9
+            */
+
+            int rows = ReadInt("Введите индекс строки: ");
+            int colums = ReadInt("Введите индекс столбца: ");
+            int[,] numbers = new int[6, 8];
+            FillArray2D(numbers);
+            PrintArray2D(numbers);
+
+            if (rows < numbers.GetLength(0) && colums < numbers.GetLength(1)) Console.WriteLine(numbers[rows, colums]);
+            else Console.WriteLine($"{rows}{colums} -> такого числа в массиве нет");
 
 
-            Console.Write("Введите элементы(через пробел): ");
-            int[] arr = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-            int count = arr.Count(x => x > 0);
-            Console.WriteLine($"Кол-во элементов > 0: {count}");
+            // Заполнение массива рандомными числами от 1 до 9
+            void FillArray2D(int[,] array)
+            {
+                for (int i = 0; i < array.GetLength(0); i++)
+                {
+                    for (int j = 0; j < array.GetLength(1); j++)
+                    {
+                        array[i, j] = new Random().Next(1, 10);
+                    }
+                }
+            }
+
+            //  Функция вывода массива в терминал
+            void PrintArray2D(int[,] array)
+            {
+                for (int i = 0; i < array.GetLength(0); i++)
+                {
+                    for (int j = 0; j < array.GetLength(1); j++)
+                    {
+                        Console.Write(array[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+
+            // Функция ввода 
+            int ReadInt(string message)
+            {
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
+            }
             break;
 
         case 3:
-            // Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
-            // заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 
-            // задаются пользователем.
-            // b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
+            /*
+            Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+            Например, задан массив:
+            1 4 7 2
+            5 9 2 3
+            8 4 2 4
+            Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+            */
 
-            Console.Write("Введите k1: ");
-            var k1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите b1: ");
-            var b1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите k2: ");
-            var k2 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите b2: ");
-            var b2 = Convert.ToDouble(Console.ReadLine());
-            
-            
-            var x = -(b1 - b2) / (k1 - k2);
-            var y = k1 * x + b1;
-            
-            x = Math.Round(x, 3);
-            y = Math.Round(y, 3);
-            
-            Console.WriteLine($"Пересечение в точке: ({x};{y})");
+            // int rows = ReadInt("Введите номер строки: ");
+            // int colums = ReadInt("Введите номер столбца: ");
+
+            int rows = 3;
+            int colums = 4;
+            int[,] numbers = new int[rows, colums];
+            FillArray2D(numbers);
+            PrintArray2D(numbers);
+
+            double[] avgNumbers = new double[numbers.GetLength(1)];
+
+            for (int i = 0; i < numbers.GetLength(1); i++)
+            {
+                double result = 0.0;
+                for (int j = 0; j < numbers.GetLength(0); j++)
+                {
+                    result += numbers[j, i];
+                }
+                avgNumbers[i] = result / numbers.GetLength(0);
+            }
+            PrintArray(avgNumbers);
+
+
+            // Заполнение массива рандомными вещественными числами
+            void FillArray2D(int[,] array)
+            {
+                for (int i = 0; i < array.GetLength(0); i++)
+                {
+                    for (int j = 0; j < array.GetLength(1); j++)
+                    {
+                        array[i, j] = new Random().Next(1, 10);
+                    }
+                }
+            }
+
+            //  Функция вывода двумерного массива в терминал
+            void PrintArray2D(int[,] array)
+            {
+                for (int i = 0; i < array.GetLength(0); i++)
+                {
+                    for (int j = 0; j < array.GetLength(1); j++)
+                    {
+                        Console.Write(array[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+
+            // Функция вывода массива в терминал 
+            void PrintArray(double[] array)
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    Console.Write(array[i] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            // Функция ввода 
+            int ReadInt(string message)
+            {
+                Console.Write(message);
+                return Convert.ToInt32(Console.ReadLine());
+            }
             break;
 
         default:
