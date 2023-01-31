@@ -7,355 +7,116 @@ while (begin)
 {
     Console.WriteLine("------");
     Console.WriteLine("Введите число для соответствующей задачи или иное для выхода:");
-    Console.WriteLine("1. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.");
-    Console.WriteLine("2. Напишите программу, которая будет находить строку с наименьшей суммой элементов.");
-    Console.WriteLine("3. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.");
-    Console.WriteLine("4. Напишите программу, которая будет находить произведение двух матриц.");
-    Console.WriteLine("5. Напишите программу, которая заполнит спирально массив 4 на 4.");
+    Console.WriteLine("1. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1. Выполнить с помощью рекурсии.");
+    Console.WriteLine("2. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.");
+    Console.WriteLine("3. Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.");
     programm = Convert.ToInt32(Console.ReadLine());
     
     switch (programm)
     {
         case 1:
-            // Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
-            // Например, задан массив:
-            // 1 4 7 2
-            // 5 9 2 3
-            // 8 4 2 4
-            // В итоге получается вот такой массив:
-            // 7 4 2 1
-            // 9 5 3 2
-            // 8 4 4 2
-
-            int[,] table = new int[3, 4];
-            FillArrayRandom(table);
-            PrintArray(table);
-            SortToLower(table);
-            Console.WriteLine();
-            PrintArray(table);
+             /*
+            Задача 64: Задайте значения N. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1.
+            N = 5. -> "5, 4, 3, 2, 1"
+            N = 8. -> "8, 7, 6, 5, 4, 3, 2, 1"
+            */
+            
+            Console.Write("Введите число: ");
+            int number = Convert.ToInt32(Console.ReadLine());
+            int count = 1;
+            NaturalToLow(number, count);
 
 
-            // Функция заполнения массива рандомно числами от 1 до 9
-            void FillArrayRandom(int[,] array)
+            void NaturalToLow(int n, int count)
             {
-                for (int i = 0; i < array.GetLength(0); i++)
+                if (count > n)
                 {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        array[i, j] = new Random().Next(1, 10);
-                    }
+                    return;
                 }
-            }
-
-            // Функция сортировки элементов в строке двумерного массива, по убыванию
-            void SortToLower(int[,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
+                else
                 {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        for (int k = 0; k < array.GetLength(1) - 1; k++)
-                        {
-                            if (array[i, k] < array[i, k + 1])
-                            {
-                                int temp = array[i, k + 1];
-                                array[i, k + 1] = array[i, k];
-                                array[i, k] = temp;
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Функция вывода двумерного массива
-            void PrintArray(int[,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
-                {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        Console.Write($"{array[i, j]} ");
-                    }
-                    Console.WriteLine();
+                    NaturalToLow(n, count + 1);
+                    Console.Write(count + " ");
                 }
             }
             break;
 
         case 2:
-            // Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-            // Например, задан массив:
-            // 1 4 7 2
-            // 5 9 2 3
-            // 8 4 2 4
-            // 5 2 6 7
+             /*
+            Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
+            M = 1; N = 15 -> 120
+            M = 4; N = 8. -> 30
+            */
+            
+            Console.Write("Введите число M: ");
+            int m = Convert.ToInt32(Console.ReadLine());
 
-            // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+            Console.Write("Введите число N: ");
+            int n = Convert.ToInt32(Console.ReadLine());
 
-            int[,] table = new int[4, 4];
-            FillArrayRandom(table);
-            PrintArray(table);
-            Console.WriteLine();
-            NumberRowMinSumElements(table);
+            SumFromMToN(m, n);
 
-
-            // Функция вывода номера строки (не индекса) с наименьшей суммой элементов 
-            void NumberRowMinSumElements(int[,] array)
+            // вызов функции "сумма чисел от M до N"
+            void SumFromMToN(int m, int n)
             {
-                int minRow = 0;
-                int minSumRow = 0;
-                int sumRow = 0;
-                for (int i = 0; i < table.GetLength(1); i++)
-                {
-                    minRow += table[0, i];
-                }
-                for (int i = 0; i < table.GetLength(0); i++)
-                {
-                    for (int j = 0; j < table.GetLength(1); j++) sumRow += table[i, j];
-                    if (sumRow < minRow)
-                    {
-                        minRow = sumRow;
-                        minSumRow = i;
-                    }
-                    sumRow = 0;
-                }
-                Console.Write($"{minSumRow + 1} строка");
+                Console.Write(SumMN(m - 1, n));
             }
 
-            // Функция вывода двумерного массива
-            void PrintArray(int[,] array)
+            // функция сумма чисел от M до N
+            int SumMN(int m, int n)
             {
-                for (int i = 0; i < array.GetLength(0); i++)
+                int res = m;
+                if (m == n)
+                    return 0;
+                else
                 {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        Console.Write($"{array[i, j]} ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-
-            // Функция заполнения массива рандомно числами от 1 до 9
-            void FillArrayRandom(int[,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
-                {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        array[i, j] = new Random().Next(1, 10);
-                    }
+                    m++;
+                    res = m + SumMN(m, n);
+                    return res;
                 }
             }
             break;
 
         case 3:
-            // Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-            // Например, даны 2 матрицы:
-            // 2 4 | 3 4
-            // 3 2 | 3 3
-            // Результирующая матрица будет:
-            // 18 20
-            // 15 18
+            /*
+            Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.
+            m = 2, n = 3 -> A(m,n) = 9
+            m = 3, n = 2 -> A(m,n) = 29
+            */
+            
+            Console.Write("Введите число M: ");
+            int m = Convert.ToInt32(Console.ReadLine());
 
-            int rows = ReadInt("Введите количество строк: ");
-            int columns = ReadInt("Введите количество столбцов: ");
-            int[,] array = new int[rows, columns];
-            int[,] secondArray = new int[rows, columns];
-            int[,] resultArray = new int[rows, columns];
+            Console.Write("Введите число N: ");
+            int n = Convert.ToInt32(Console.ReadLine());
 
-            FillArrayRandom(array);
-            PrintArray2D(array);
+            AkkermanFunction(m,n);
 
-            Console.WriteLine();
 
-            FillArrayRandom(secondArray);
-            PrintArray2D(secondArray);
-
-            Console.WriteLine();
-
-            if (array.GetLength(0) != secondArray.GetLength(1))
+            // вызов функции Аккермана
+            void AkkermanFunction(int m, int n)
             {
-                Console.WriteLine(" Нельзя перемножить ");
-                return;
+                Console.Write(Akkerman(m, n)); 
             }
-            for (int i = 0; i < array.GetLength(0); i++)
+
+            // функция Аккермана
+            int Akkerman(int m, int n)
             {
-                for (int j = 0; j < secondArray.GetLength(1); j++)
+                if (m == 0)
                 {
-                    resultArray[i, j] = 0;
-                    for (int k = 0; k < array.GetLength(1); k++)
-                    {
-                        resultArray[i, j] += array[i, k] * secondArray[k, j];
-                    }
+                    return n + 1;
                 }
-            }
-
-            PrintArray2D(resultArray);
-
-
-
-            // Функция ввода
-            int ReadInt(string message)
-            {
-                Console.Write(message);
-                return Convert.ToInt32(Console.ReadLine());
-            }
-
-            // Функция заполнения массива рандомными числами от 1 до 9
-            void FillArrayRandom(int[,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
+                else if (n == 0 && m > 0)
                 {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        array[i, j] = new Random().Next(1, 10);
-                    }
+                    return Akkerman(m - 1, 1);
                 }
-            }
-
-            // Функция вывода двумерного массива в терминал 
-            void PrintArray2D(int[,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
+                else
                 {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        Console.Write($"{array[i, j]} ");
-                    }
-                    Console.WriteLine();
+                    return (Akkerman(m - 1, Akkerman(m, n - 1)));
                 }
             }
             break;
-
-            case 3:
-            // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
-            // Например, на выходе получается вот такой массив:
-            // 01 02 03 04
-            // 12 13 14 05
-            // 11 16 15 06
-            // 10 09 08 07
-
-            int len = 4;
-            int[,] table = new int[len, len];
-            FillArraySpiral(table, len);
-            PrintArray(table);
-
-
-            //  Функция заполнения массива по спирали начиная с 1
-            void FillArraySpiral(int[,] array, int n)
-            {
-                int i = 0, j = 0;
-                int value = 1;
-                for (int e = 0; e < n * n; e++)
-                {
-                    int k = 0;
-                    do { array[i, j++] = value++; } while (++k < n - 1);
-                    for (k = 0; k < n - 1; k++) array[i++, j] = value++;
-                    for (k = 0; k < n - 1; k++) array[i, j--] = value++;
-                    for (k = 0; k < n - 1; k++) array[i--, j] = value++;
-                    ++i; ++j;
-                    n = n < 2 ? 0 : n - 2;
-                }
-            }
-
-            //  Функция вывода двумерного массива в терминал
-            void PrintArray(int[,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
-                {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        if (array[i, j] < 10)
-                        {
-                            Console.Write("0" + array[i, j]);
-                            Console.Write(" ");
-                        }
-                        else Console.Write(array[i, j] + " ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-            break;
-        
-        case 3:
-            // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
-            // Массив размером 2 x 2 x 2
-            // 66(0,0,0) 25(0,1,0)
-            // 34(1,0,0) 41(1,1,0)
-            // 27(0,0,1) 90(0,1,1)
-            // 26(1,0,1) 55(1,1,1)
-
-            int arraySizeX = 2;
-            int arraySizeY = 2;
-            int arraySizeZ = 2;
-            int minNumber = 10;
-            int maxNumber = 99;
-            int[,,] testArray = new int[arraySizeX, arraySizeY, arraySizeZ];
-
-            Console.Clear();
-            FillArrayRandomNumber(testArray, minNumber, maxNumber);
-            PrintArrayWithIdex(testArray);
-
-            void FillArrayRandomNumber(int[,,] array, int minNumber = 0, int maxNumber = 9)
-            {
-                Random rand = new Random();
-
-                for (int i = 0; i < array.GetLength(0); i++)
-                {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        for (int h = 0; h < array.GetLength(2); h++)
-                        {
-                            while (array[i, j, h] == 0)
-                            {
-                                int number = rand.Next(minNumber, maxNumber + 1);
-
-                                if (IsNumberInArray(array, number) == false)
-                                {
-                                    array[i, j, h] = number;
-                                }
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            bool IsNumberInArray(int[,,] array, int number)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
-                {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        for (int h = 0; h < array.GetLength(2); h++)
-                        {
-                            if (array[i, j, h] == number) return true;
-                        }
-                    }
-                }
-
-                return false;
-            }
-
-            void PrintArrayWithIdex(int[,,] array)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
-                {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        for (int h = 0; h < array.GetLength(2); h++)
-                        {
-                            Console.Write(array[i, j, h]);
-                            Console.Write("({0},{1},{2})\t", i, j, h);
-                        }
-
-                        Console.WriteLine();
-                    }
-
-                    Console.WriteLine();
-                }
-            }
-            break;
-
+           
         default:
             begin = false;
             break;
